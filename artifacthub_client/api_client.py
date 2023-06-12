@@ -224,6 +224,8 @@ class ApiClient(object):
             return self.__deserialize_file(response)
 
         # fetch data from response object
+        if type(response.data) == bytes:
+            response.data = response.data.decode('utf-8')
         try:
             data = json.loads(response.data)
         except ValueError:
@@ -239,7 +241,7 @@ class ApiClient(object):
 
         :return: object.
         """
-        if data is None:
+        if data in ["", None]:
             return None
 
         if type(klass) == str:
