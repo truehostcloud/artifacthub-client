@@ -36,7 +36,7 @@ class RESTResponse(io.IOBase):
 
     def __init__(self, resp):
         self.urllib3_response = resp
-        self.status = resp.state
+        self.status = resp.status
         self.reason = resp.reason
         self.data = resp.data
 
@@ -293,7 +293,7 @@ class ApiException(Exception):
 
     def __init__(self, status=None, reason=None, http_resp=None):
         if http_resp:
-            self.status = http_resp.state
+            self.status = http_resp.status
             self.reason = http_resp.reason
             self.body = http_resp.data
             self.headers = http_resp.getheaders()
